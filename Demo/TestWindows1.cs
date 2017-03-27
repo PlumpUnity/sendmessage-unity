@@ -9,15 +9,15 @@ public class TestWindows1 : MonoBehaviour {
 	void Start () {
         receive = new DataReceiver();
         receive.RegistHook();
-        receive.RegistReceiveEvent(OnReceive);
+        EventHolder.RegisterEvent<string>("add", OnReceive);
         text = FindObjectOfType<UnityEngine.UI.Text>();
 
     }
 	
 	// Update is called once per frame
-	void OnReceive (string data) {
-        Debug.Log(data);
-        text.text += data;
+	void OnReceive (string body) {
+        Debug.Log(body);
+        text.text += body;
         if (text.text.Length > 3000)
         {
             text.text = "";

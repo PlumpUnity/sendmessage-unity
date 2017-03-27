@@ -8,7 +8,5 @@ namespace MessageTrans
     {
         void RegistHook();
         void RemoveHook();
-        void RegistReceiveEvent(Action<string> onReceive);
-        void RegistReceiveEvent<T>(Action<T> onReceive);
     }
 }

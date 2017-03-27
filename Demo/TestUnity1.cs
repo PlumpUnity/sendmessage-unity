@@ -6,15 +6,21 @@ using System.Text;
 using MessageTrans;
 public class TestUnity1 : MonoBehaviour {
     IntPtr target;
+    DataSender sender;
 	// Update is called once per frame
 	void Update () {
-        if (target ==IntPtr.Zero)
+        if (target == IntPtr.Zero)
         {
             target = DataUtility.FindWindow("UnityWndClass", null);
+            if (target != IntPtr.Zero)
+            {
+                sender = new DataSender();
+                sender.RegistHandle(target);
+            }
         }
         else
         {
-            DataUtility.SendString(target, "你好啊");
+            sender.SendMessage("add","hellow world");
         }
 	}
 }

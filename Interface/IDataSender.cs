@@ -7,8 +7,8 @@ namespace MessageTrans
     public interface IDataSender
     {
         void RegistHandle(IntPtr handle);
-        bool SendData(string data);
-        bool SendData<T>(T data);
+        bool SendMessage(string key);
+        bool SendMessage<T>(string key,T body);
     }
 
 }

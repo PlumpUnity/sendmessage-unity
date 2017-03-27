@@ -1,15 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 using UnityEngine;
 using System.Runtime.InteropServices;
 using System;
-using System.Text;
 
 namespace MessageTrans
 {
     public class DataReceiver : IDataReceiver
     {
-        Action<string> onDataReceive;
         //钩子
         private int idHook = 0;
         //是否安装了钩子
@@ -36,7 +33,7 @@ namespace MessageTrans
                     IPC_Buffer entries1 = (IPC_Buffer)Marshal.PtrToStructure((IntPtr)entries.lpData, typeof(IPC_Buffer));
                     IntPtr intp = new IntPtr(entries1.cbBuffer);
                     string str = new string((sbyte*)intp);
-                    if(onDataReceive != null) onDataReceive(str);
+                    OnReceived(str);
                 }
                 if (CallNextProc)
                 {
@@ -62,22 +59,21 @@ namespace MessageTrans
 
         public void RemoveHook()
         {
-            onDataReceive = null;
             if (isHook)
             {
                 DataUtility.UnhookWindowsHookEx(idHook);
             }
         }
 
-        public void RegistReceiveEvent(Action<string> onReceive)
+        public void OnReceived(string data)
         {
-            onDataReceive = onReceive;
+            object obj = JsonConvert.DeserializeObject(data);
+            if (obj is IMessage)
+            {
+                EventHolder.NotifyObserver((IMessage)obj);
+            }
         }
 
-        public void RegistReceiveEvent<T>(Action<T> onReceive)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 
