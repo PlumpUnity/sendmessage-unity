@@ -56,10 +56,12 @@ public class TestUnity : MonoBehaviour
     private void sendJson()
     {
         IntPtr hWndPalaz = FindWindow(null, "window");//就是窗体的的标题
+
         if (hWndPalaz != null)
         {
             //获得游戏本身句柄 
             m_hWnd = FindWindow("UnityWndClass", null);
+            Debug.Log(m_hWnd +"...." + hWndPalaz);
 
             //发送用户准备好消息（这个是个json插件我就不提供了你们自己搞自己的json new一个实例这里不改会报错）
             JSONObject jsStart = new JSONObject();
@@ -73,8 +75,6 @@ public class TestUnity : MonoBehaviour
             IntPtr pData = Marshal.AllocHGlobal(2 * bytes.Length);
             Marshal.Copy(bytes, 0, pData, bytes.Length);
             SendData(m_hWnd, IPC_CMD_GF_SOCKET, IPC_SUB_GF_SOCKET_SEND, pData, (ushort)bytes.Length);
-
-
         }
 
     }

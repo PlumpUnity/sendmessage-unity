@@ -28,6 +28,7 @@ public class TestWindows : MonoBehaviour
     private static extern int CallNextHookEx(int idHook, int nCode, int wParam, int lParam);
     //回调委托
     private delegate int HookProc(int nCode, int wParam, int lParam);
+    
     //钩子
     int idHook = 0;
     //是否安装了钩子
@@ -124,6 +125,7 @@ public class TestWindows : MonoBehaviour
                 IPC_Buffer entries1 = (IPC_Buffer)Marshal.PtrToStructure((IntPtr)entries.lpData, typeof(IPC_Buffer));
                 IntPtr intp = new IntPtr(entries1.cbBuffer);
                 string str = new string((sbyte*)intp);
+                SetUI(str);
                 Debug.Log("json数据：" + str);
             }
             if (CallNextProc)
@@ -142,5 +144,9 @@ public class TestWindows : MonoBehaviour
             return 0;
         }
 
+    }
+    public void SetUI(string value)
+    {
+        FindObjectOfType<UnityEngine.UI.Text>().text = value;
     }
 }
