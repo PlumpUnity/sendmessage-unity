@@ -2,7 +2,8 @@
 using System.Text;
 using System;
 
-namespace MessageTrans {
+namespace MessageTrans.Interal
+{
     /// <summary>
     /// 发送windows消息方便user32.dll中的SendMessage函数使用
     /// </summary>

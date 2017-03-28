@@ -4,6 +4,13 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using System.Text;
 using MessageTrans;
+using MessageTrans.Interal;
+using Newtonsoft.Json;
+public class Trs
+{
+    public int a;
+    public string b;
+}
 public class TestUnity1 : MonoBehaviour {
     IntPtr target;
     DataSender sender;
@@ -20,7 +27,10 @@ public class TestUnity1 : MonoBehaviour {
         }
         else
         {
-            sender.SendMessage("add","hellow world");
+            Trs trs = new global::Trs();
+            trs.a = 1;
+            trs.b = "2";
+            sender.SendMessage("add", JsonConvert.SerializeObject(trs));
         }
 	}
 }

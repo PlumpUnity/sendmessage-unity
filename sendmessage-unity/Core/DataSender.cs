@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using MessageTrans.Interal;
 
 namespace MessageTrans
 {
@@ -17,19 +17,21 @@ namespace MessageTrans
                 return false;
             else
             {
-                var data = Message.Allocate(key);
-                return DataUtility.SendString(handle, JsonConvert.SerializeObject(data));
+                JSONClass node = new JSONClass();
+                node["Key"] = key;
+                return DataUtility.SendString(handle, node.ToString());
             }
         }
-
-        public bool SendMessage<T>(string key,T body)
+        public bool SendMessage(string key, string body)
         {
             if (handle == IntPtr.Zero)
                 return false;
             else
             {
-                var data = Message<T>.Allocate(key,body);
-                return DataUtility.SendString(handle, JsonConvert.SerializeObject(data));
+                JSONClass node = new JSONClass();
+                node["Key"] = key;
+                node["Body"] = body;
+                return DataUtility.SendString(handle, node.ToString());
             }
         }
     }

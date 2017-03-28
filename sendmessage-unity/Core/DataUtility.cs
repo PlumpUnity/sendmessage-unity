@@ -4,7 +4,8 @@ using System.Runtime.InteropServices;
 using System;
 using System.Text;
 
-namespace MessageTrans
+
+namespace MessageTrans.Interal
 {
     public static class DataUtility
     {

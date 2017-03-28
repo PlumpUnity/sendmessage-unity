@@ -8,7 +8,7 @@ namespace MessageTrans
     {
         void RegistHandle(IntPtr handle);
         bool SendMessage(string key);
-        bool SendMessage<T>(string key,T body);
+        bool SendMessage(string key,string body);
     }
 
 }

@@ -5,18 +5,20 @@ using UnityEngine.EventSystems;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MessageTrans.Interal;
+
 namespace MessageTrans
 {
     public static class EventHolder
     {
-        public static System.Action<IMessage> MessageNotHandled;
+        public static System.Action<string> MessageNotHandled;
 
         public static Dictionary<string, Delegate> m_needHandle = new Dictionary<string, Delegate>();
-        public static void NoMessageHandle(IMessage rMessage)
+        public static void NoMessageHandle(string rMessage)
         {
             if (MessageNotHandled == null)
             {
-                Debug.LogWarning("MessageDispatcher: Unhandled Message of type " + rMessage.Key);
+                Debug.LogWarning("MessageDispatcher: Unhandled Message of type " + rMessage);
             }
             else
             {
@@ -32,10 +34,10 @@ namespace MessageTrans
         {
             RemoveDelegate(key, action);
         }
-        public static void RegisterEvent<T>(string key, UnityAction<T> action){
+        public static void RegisterEvent(string key, UnityAction<string> action){
             AddDelegate(key, action);
         }
-        public static void RemoveEvent<T>(string key, UnityAction<T> action)
+        public static void RemoveEvent(string key, UnityAction<string> action)
         {
             RemoveDelegate(key, action);
         }
@@ -78,30 +80,29 @@ namespace MessageTrans
         #endregion
 
         #region 触发事件
-        public static void NotifyObserver(IMessage rMessage)
+        public static void NotifyObserver(string rMessage)
         {
             bool lReportMissingRecipient = true;
-
-            if (m_needHandle.ContainsKey(rMessage.Key))
+            JSONClass data = JSONNode.Parse(rMessage).AsObject;
+            Debug.Log("rMessage" + rMessage);
+            if (m_needHandle.ContainsKey(data["Key"]))
             {
-                var body = rMessage.GetType().GetProperty("Body");
-
+                var body = data["Body"];
+                Debug.Log(body);
                 if (body != null)
                 {
-                    var data = body.GetValue(rMessage, null);
-
                     if (data != null)
                     {
-                        m_needHandle[rMessage.Key].DynamicInvoke(data);
+                        m_needHandle[data["Key"]].DynamicInvoke(body.ToString());
                     }
                     else
                     {
-                        m_needHandle[rMessage.Key].DynamicInvoke();
+                        m_needHandle[data["Key"]].DynamicInvoke();
                     }
                 }
                 else
                 {
-                    m_needHandle[rMessage.Key].DynamicInvoke();
+                    m_needHandle[data["Key"]].DynamicInvoke();
                 }
 
                 lReportMissingRecipient = false;

@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Runtime.InteropServices;
 using System;
-
+using MessageTrans.Interal;
 namespace MessageTrans
 {
     public class DataReceiver : IDataReceiver
@@ -18,7 +18,12 @@ namespace MessageTrans
             get { return _bCallNext; }
             set { _bCallNext = value; }
         }
+        private JsonSerializerSettings setting;
 
+        public DataReceiver()
+        {
+            setting = new JsonSerializerSettings();
+        }
         //钩子回调
         private unsafe int Hook(int nCode, int wParam, int lParam)
         {
@@ -67,11 +72,7 @@ namespace MessageTrans
 
         public void OnReceived(string data)
         {
-            object obj = JsonConvert.DeserializeObject(data);
-            if (obj is IMessage)
-            {
-                EventHolder.NotifyObserver((IMessage)obj);
-            }
+            EventHolder.NotifyObserver(data);
         }
 
     }

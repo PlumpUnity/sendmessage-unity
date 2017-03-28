@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MessageTrans
+namespace MessageTrans.Interal
 {
     public struct CWPSTRUCT
     {

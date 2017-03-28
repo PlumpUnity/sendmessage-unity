@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System;
-namespace MessageTrans
+
+namespace MessageTrans.Interal
 {
     public unsafe struct IPC_Buffer
     {
