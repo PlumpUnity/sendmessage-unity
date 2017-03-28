@@ -68,6 +68,9 @@ public class Demo : MonoBehaviour {
         windowswitch.CloseChildWindow();
     }
     void SendInfoToChild (string text) {
+
+        Win32API.SendMessage(windowswitch.Current, Win32API.WM_ACTIVATE, Win32API.WA_ACTIVE, IntPtr.Zero);
+
         if (!string.IsNullOrEmpty(text))
         {
             childSender.SendMessage("simpleText", text);
@@ -75,6 +78,8 @@ public class Demo : MonoBehaviour {
 	}
     void SendInfoToParent(string text)
     {
+        Win32API.SendMessage(windowswitch.Current, Win32API.WM_ACTIVATE, Win32API.WA_ACTIVE, IntPtr.Zero);
+
         if (!string.IsNullOrEmpty(text))
         {
             parentSender.SendMessage("simpleText", text);
