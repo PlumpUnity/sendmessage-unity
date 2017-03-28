@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using UnityEngine;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System;
 using MessageTrans.Interal;
+
 namespace MessageTrans
 {
+
     public class DataReceiver : IDataReceiver
     {
         //钩子
@@ -18,11 +18,10 @@ namespace MessageTrans
             get { return _bCallNext; }
             set { _bCallNext = value; }
         }
-        private JsonSerializerSettings setting;
-
+        private EventHolder eholder;
         public DataReceiver()
         {
-            setting = new JsonSerializerSettings();
+            eholder = new Interal.EventHolder();
         }
         //钩子回调
         private unsafe int Hook(int nCode, int wParam, int lParam)
@@ -52,7 +51,6 @@ namespace MessageTrans
             }
             catch (Exception ex)
             {
-                Debug.Log(ex.Message);
                 return 0;
             }
         }
@@ -70,9 +68,25 @@ namespace MessageTrans
             }
         }
 
-        public void OnReceived(string data)
+        public void RegisterEvent(string key, Action action)
         {
-            EventHolder.NotifyObserver(data);
+            eholder.AddDelegate(key, action);
+        }
+        public void RemoveEvent(string key, Action action)
+        {
+            eholder.RemoveDelegate(key, action);
+        }
+        public void RegisterEvent(string key, Action<string> action)
+        {
+            eholder.AddDelegate(key, action);
+        }
+        public void RemoveEvent(string key, Action<string> action)
+        {
+            eholder.RemoveDelegate(key, action);
+        }
+        private void OnReceived(string data)
+        {
+            eholder.NotifyObserver(data);
         }
 
     }

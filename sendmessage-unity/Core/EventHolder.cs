@@ -1,24 +1,20 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using MessageTrans.Interal;
 
-namespace MessageTrans
+namespace MessageTrans.Interal
 {
-    public static class EventHolder
+    public class EventHolder
     {
-        public static System.Action<string> MessageNotHandled;
+        public System.Action<string> MessageNotHandled;
 
-        public static Dictionary<string, Delegate> m_needHandle = new Dictionary<string, Delegate>();
-        public static void NoMessageHandle(string rMessage)
+        public Dictionary<string, Delegate> m_needHandle = new Dictionary<string, Delegate>();
+        public void NoMessageHandle(string rMessage)
         {
             if (MessageNotHandled == null)
             {
-                Debug.LogWarning("MessageDispatcher: Unhandled Message of type " + rMessage);
+                //Debug.LogWarning("MessageDispatcher: Unhandled Message of type " + rMessage);
             }
             else
             {
@@ -27,21 +23,8 @@ namespace MessageTrans
         }
 
         #region 注册注销事件
-        public static void RegisterEvent(string key,UnityAction action){
-            AddDelegate(key, action);
-        }
-        public static void RemoveEvent(string key, UnityAction action)
-        {
-            RemoveDelegate(key, action);
-        }
-        public static void RegisterEvent(string key, UnityAction<string> action){
-            AddDelegate(key, action);
-        }
-        public static void RemoveEvent(string key, UnityAction<string> action)
-        {
-            RemoveDelegate(key, action);
-        }
-        static void AddDelegate(string key, Delegate handle)
+      
+        public void AddDelegate(string key, Delegate handle)
         {
             // First check if we know about the message type
             if (!m_needHandle.ContainsKey(key))
@@ -53,7 +36,7 @@ namespace MessageTrans
                 m_needHandle[key] = Delegate.Combine(m_needHandle[key], handle);
             }
         }
-        static bool RemoveDelegate(string key, Delegate handle)
+        public bool RemoveDelegate(string key, Delegate handle)
         {
             if (m_needHandle.ContainsKey(key))
             {
@@ -66,29 +49,27 @@ namespace MessageTrans
             }
             return true;
         }
-        public static void RemoveEvents(string key)
+        public void RemoveEvents(string key)
         {
             if (m_needHandle.ContainsKey(key))
             {
                 m_needHandle.Remove(key);
             }
         }
-        public static bool HaveEvent(string key)
+        public bool HaveEvent(string key)
         {
             return m_needHandle.ContainsKey(key);
         }
         #endregion
 
         #region 触发事件
-        public static void NotifyObserver(string rMessage)
+        public void NotifyObserver(string rMessage)
         {
             bool lReportMissingRecipient = true;
             JSONClass data = JSONNode.Parse(rMessage).AsObject;
-            Debug.Log("rMessage" + rMessage);
             if (m_needHandle.ContainsKey(data["Key"]))
             {
                 var body = data["Body"];
-                Debug.Log(body);
                 if (body != null)
                 {
                     if (data != null)

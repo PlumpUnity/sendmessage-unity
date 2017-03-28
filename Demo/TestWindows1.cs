@@ -9,7 +9,7 @@ public class TestWindows1 : MonoBehaviour {
 	void Start () {
         receive = new DataReceiver();
         receive.RegistHook();
-        EventHolder.RegisterEvent("add", OnReceive);
+        //EventHolder.RegisterEvent("add", OnReceive);
         text = FindObjectOfType<UnityEngine.UI.Text>();
 
     }
