@@ -6,11 +6,36 @@ using System.Collections.Generic;
 using System;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 public class WindowSwitchCtrl : IWindowSwitchCtrl
 {
     private bool hideParent;
+    private bool loadAsChild;
     private IntPtr parentWindow;
     private Process childProcess;
+    public IntPtr Current
+    {
+        get
+        {
+            Debug.Log("holderwindow:" + holderwindow);
+            if (current == IntPtr.Zero)
+            {
+                Debug.Log("loadAsChild:" + loadAsChild);
+
+                if (loadAsChild)
+                {
+                    EnumChildWindows(holderwindow, (hwnd, lparam) => { current = hwnd ; return 0; }, IntPtr.Zero);
+                    Debug.Log("current:" + current);
+                }
+                else
+                {
+                    Process process = Process.GetCurrentProcess();
+                    current = GetProcessWnd(process);
+                }
+            }
+            return current;
+        }
+    }
     public IntPtr Parent
     {
         get
@@ -35,6 +60,8 @@ public class WindowSwitchCtrl : IWindowSwitchCtrl
 
     }
     private IntPtr child;
+    private IntPtr holderwindow;
+    private IntPtr current;
     /// <summary>
     /// 关闭指定窗口
     /// </summary>
@@ -73,9 +100,14 @@ public class WindowSwitchCtrl : IWindowSwitchCtrl
     {
         hideParent = false;
         parentWindow = IntPtr.Zero;
+        holderwindow = IntPtr.Zero;
         argus = null;
 
         string[] CommandLineArgs = Environment.GetCommandLineArgs();
+        foreach (var item in CommandLineArgs)
+        {
+           UnityEngine.Debug.Log("参数：" + item);
+        }
         //默认参数
         if (CommandLineArgs.Length == 1)
         {
@@ -85,21 +117,48 @@ public class WindowSwitchCtrl : IWindowSwitchCtrl
         ///父级handle
         if (CommandLineArgs.Length > 1)
         {
-            parentWindow = new IntPtr(int.Parse(CommandLineArgs[1]));
+            if(CommandLineArgs[1] == "-parentHWND")
+            {
+                loadAsChild = true;
+            }
+            else
+            {
+                parentWindow = new IntPtr(int.Parse(CommandLineArgs[1]));
+            }
         }
         ///是否隐藏了父级
         if (CommandLineArgs.Length > 2)
         {
-            hideParent = new IntPtr(int.Parse(CommandLineArgs[2])) == (IntPtr)1;
+            if (loadAsChild)
+            {
+                holderwindow = new IntPtr(int.Parse(CommandLineArgs[2]));
+            }
+            else
+            {
+                hideParent = new IntPtr(int.Parse(CommandLineArgs[2])) == (IntPtr)1;
+            }
         }
         ///用户自定义参数
         if (CommandLineArgs.Length > 3)
         {
-            argus = new string[CommandLineArgs.Length - 3];
-            for (int i = 0; i < argus.Length; i++)
+            if (loadAsChild)
             {
-                argus[i] = CommandLineArgs[(i + 3)];
+                parentWindow = new IntPtr(int.Parse(CommandLineArgs[3]));
+                argus = new string[CommandLineArgs.Length - 4];
+                for (int i = 0; i < argus.Length; i++)
+                {
+                    argus[i] = CommandLineArgs[(i + 4)];
+                }
             }
+            else
+            {
+                argus = new string[CommandLineArgs.Length - 3];
+                for (int i = 0; i < argus.Length; i++)
+                {
+                    argus[i] = CommandLineArgs[(i + 3)];
+                }
+            }
+          
         }
 
         if (hideParent)
@@ -121,7 +180,7 @@ public class WindowSwitchCtrl : IWindowSwitchCtrl
             if (System.IO.File.Exists(path))
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo(path);
-                startInfo.Arguments = (WindowCalc.GetCurrProcessWnd() + " " + (hideThis ? 1 : 0).ToString()).ToString();
+                startInfo.Arguments = (Current + " " + (hideThis ? 1 : 0).ToString()).ToString();
                 for (int i = 0; i < args.Length; i++)
                 {
                     startInfo.Arguments += " " + args[i];
@@ -238,5 +297,9 @@ public class WindowSwitchCtrl : IWindowSwitchCtrl
 
     [DllImport("kernel32.dll")]
     public static extern void SetLastError(uint dwErrCode);
+
+    public delegate int WindowEnumProc(IntPtr hwnd, IntPtr lparam);
+    [DllImport("user32.dll")]
+    public static extern bool EnumChildWindows(IntPtr hwnd, WindowEnumProc func, IntPtr lParam);
 
 }

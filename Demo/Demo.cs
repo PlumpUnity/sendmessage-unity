@@ -9,6 +9,7 @@ public class Demo : MonoBehaviour {
     public Text parentT;
     public Text childT;
     public Text messageT;
+    public Text thisT;
     public InputField parentI;
     public InputField childI;
     public Button openChild;
@@ -18,7 +19,6 @@ public class Demo : MonoBehaviour {
     string[] parmars;
     IntPtr parentHandle { get { return windowswitch.Parent; } }
     IntPtr childHandle { get { return windowswitch.Child; } }
-
     DataReceiver receiver;
     DataSender childSender;
     DataSender parentSender;
@@ -36,6 +36,11 @@ public class Demo : MonoBehaviour {
         closeChild.onClick.AddListener(TryCloseChild);
         parentI.onEndEdit.AddListener(SendInfoToParent);
         childI.onEndEdit.AddListener(SendInfoToChild);
+    }
+
+    void Start()
+    {
+        thisT.text = windowswitch.Current.ToString();
     }
     private void InitMessage()
     {
@@ -59,10 +64,8 @@ public class Demo : MonoBehaviour {
     }
     void TryCloseChild()
     {
-        if (windowswitch.CloseChildWindow())
-        {
-            childT.text = null;
-        }
+        childT.text = null;
+        windowswitch.CloseChildWindow();
     }
     void SendInfoToChild (string text) {
         if (!string.IsNullOrEmpty(text))
