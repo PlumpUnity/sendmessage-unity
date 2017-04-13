@@ -1,0 +1,11 @@
+E:\Githubs\sendmessage\dlls\SendMessageHelp\SendMessageHelp\bin\Debug\SendMessageHelp.dll
+E:\Githubs\sendmessage\dlls\SendMessageHelp\SendMessageHelp\bin\Debug\SendMessageHelp.pdb
+E:\Githubs\sendmessage\dlls\SendMessageHelp\SendMessageHelp\bin\Debug\Newtonsoft.Json.dll
+E:\Githubs\sendmessage\dlls\SendMessageHelp\SendMessageHelp\obj\Debug\MessageTrans.csprojResolveAssemblyReference.cache
+E:\Githubs\sendmessage\dlls\SendMessageHelp\SendMessageHelp\obj\Debug\SendMessageHelp.dll
+E:\Githubs\sendmessage\dlls\SendMessageHelp\SendMessageHelp\obj\Debug\SendMessageHelp.pdb
+E:\Githubs\sendmessage\dlls\SendMessageHelp\MessageTrans\bin\Debug\Newtonsoft.Json.dll
+E:\Githubs\sendmessage\dlls\SendMessageHelp\MessageTrans\bin\Debug\MessageTrans.dll
+E:\Githubs\sendmessage\dlls\SendMessageHelp\MessageTrans\bin\Debug\MessageTrans.pdb
+E:\Githubs\sendmessage\dlls\SendMessageHelp\MessageTrans\obj\Debug\MessageTrans.dll
+E:\Githubs\sendmessage\dlls\SendMessageHelp\MessageTrans\obj\Debug\MessageTrans.pdb

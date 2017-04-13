@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SendMessageHelp", "SendMessageHelp\SendMessageHelp.csproj", "{F75BCF6E-F74A-4102-A1CD-DAB09BCE2659}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageTrans", "MessageTrans\MessageTrans.csproj", "{F75BCF6E-F74A-4102-A1CD-DAB09BCE2659}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
