@@ -1,0 +1,5 @@
+C:\Users\Administrator\Desktop\SendMessageHelp\SendMessageHelp\bin\Debug\SendMessageHelp.dll
+C:\Users\Administrator\Desktop\SendMessageHelp\SendMessageHelp\bin\Debug\SendMessageHelp.pdb
+C:\Users\Administrator\Desktop\SendMessageHelp\SendMessageHelp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Administrator\Desktop\SendMessageHelp\SendMessageHelp\obj\Debug\SendMessageHelp.dll
+C:\Users\Administrator\Desktop\SendMessageHelp\SendMessageHelp\obj\Debug\SendMessageHelp.pdb

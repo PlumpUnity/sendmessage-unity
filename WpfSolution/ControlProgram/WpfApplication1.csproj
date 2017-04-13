@@ -51,6 +51,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SendMessageHelp">
+      <HintPath>..\..\dlls\SendMessageHelp.dll</HintPath>
+    </Reference>
     <Reference Include="SocketLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Other\Connection\SocketLib\bin\Debug\SocketLib.dll</HintPath>
@@ -77,18 +80,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppPath.cs" />
-    <Compile Include="COPYDATASTRUCT.cs" />
-    <Compile Include="CWPSTRUCT.cs" />
-    <Compile Include="DataReceiver.cs" />
-    <Compile Include="DataSender.cs" />
-    <Compile Include="DataUtility.cs" />
-    <Compile Include="EventHolder.cs" />
-    <Compile Include="IDataReceiver.cs" />
-    <Compile Include="IDataSender.cs" />
-    <Compile Include="IPC_Buffer.cs" />
-    <Compile Include="IPC_Head.cs" />
-    <Compile Include="ObjectPool.cs" />
-    <Compile Include="SimpleJson.cs" />
     <Compile Include="UnityLoder.cs" />
     <Compile Include="Win32API.cs" />
     <Page Include="MainWindow.xaml">
@@ -99,7 +90,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataLoader.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
