@@ -33,7 +33,6 @@ public class TestWindows : MonoBehaviour
     int idHook = 0;
     //是否安装了钩子
     bool isHook = false;
-    GCHandle gc;
     private const int WH_CALLWNDPROC = 4;  //钩子类型 全局钩子
 
     //定义结构和发送的结构对应
@@ -83,7 +82,7 @@ public class TestWindows : MonoBehaviour
                 Debug.Log("钩子[" + idHook + "]安装成功");
                 isHook = true;
                 //保持活动 避免 回调过程 被垃圾回收
-                gc = GCHandle.Alloc(lpfn);
+                 GCHandle.Alloc(lpfn);
             }
             else
             {

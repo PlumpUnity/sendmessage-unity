@@ -57,7 +57,7 @@ public class TestUnity : MonoBehaviour
     {
         IntPtr hWndPalaz = FindWindow(null, "window");//就是窗体的的标题
 
-        if (hWndPalaz != null)
+        if (hWndPalaz != IntPtr.Zero)
         {
             //获得游戏本身句柄 
             m_hWnd = FindWindow("UnityWndClass", null);
@@ -97,7 +97,7 @@ public class TestUnity : MonoBehaviour
         IPCBuffer.Head.wPacketSize = (ushort)Marshal.SizeOf(typeof(IPC_Head));
 
         //内存操作
-        if (pData != null)
+        if (pData != IntPtr.Zero)
         {
             //效验长度
             if (wDataSize > 1024) return false;

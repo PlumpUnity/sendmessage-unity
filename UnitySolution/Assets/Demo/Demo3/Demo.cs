@@ -4,7 +4,8 @@ using UnityEngine.Events;
 using System.Collections;
 using System;
 using MessageTrans;
-
+using FormSwitch;
+using FormSwitch.Internal;
 public class Demo : MonoBehaviour {
     public Text parentT;
     public Text childT;
@@ -26,8 +27,8 @@ public class Demo : MonoBehaviour {
     {
         InitMessage();
 
-        windowswitch = new WindowSwitchCtrl();
-        if(windowswitch.OnOpenedByParent(out parmars)) {
+        windowswitch = new WindowSwitchUnity();
+        if(windowswitch.OnOpenedByParent(ref parmars)) {
             //以外部程序的方式打开
             parentT.text = parentHandle.ToString();
             parentSender.RegistHandle(parentHandle);

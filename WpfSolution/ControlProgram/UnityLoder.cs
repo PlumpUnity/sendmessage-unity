@@ -53,8 +53,9 @@ namespace ControlProgram
             IntPtr mainHandle = new WindowInteropHelper(window).Handle;
             HwndSource source = PresentationSource.FromDependencyObject(ScalePanel) as HwndSource;
             windowHandle = source.Handle;
-
-            info.Arguments = "-parentHWND " + windowHandle.ToInt32() + " " + mainHandle;
+            Console.WriteLine(windowHandle.ToString());
+            Console.WriteLine(mainHandle.ToString());
+            info.Arguments = "-parentHWND " + windowHandle.ToInt32();
             app = Process.Start(info);
             app.WaitForInputIdle();
             Win32API.EnumChildWindows(windowHandle, WindowEnum, IntPtr.Zero);

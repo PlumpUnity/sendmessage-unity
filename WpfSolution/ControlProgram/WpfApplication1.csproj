@@ -51,9 +51,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MessageTrans, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Administrator\Desktop\In_Unity3dFrom\Dlls\MessageTrans.dll</HintPath>
+    <Reference Include="MessageTrans">
+      <HintPath>..\..\dlls\MessageTrans.dll</HintPath>
     </Reference>
     <Reference Include="SocketLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
