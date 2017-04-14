@@ -67,23 +67,24 @@ namespace MessageTrans.Interal
         {
             bool lReportMissingRecipient = true;
             JSONClass data = JSONNode.Parse(rMessage).AsObject;
-            if (m_needHandle.ContainsKey(data["Key"]))
+            string key = data["Key"].Value;
+            if (m_needHandle.ContainsKey(key))
             {
                 var body = data["Body"];
                 if (body != null)
                 {
-                    if (data != null)
+                    if (body.Value != null)
                     {
-                        m_needHandle[data["Key"]].DynamicInvoke(body.ToString());
+                        m_needHandle[key].DynamicInvoke(body.Value);
                     }
                     else
                     {
-                        m_needHandle[data["Key"]].DynamicInvoke();
+                        m_needHandle[key].DynamicInvoke();
                     }
                 }
                 else
                 {
-                    m_needHandle[data["Key"]].DynamicInvoke();
+                    m_needHandle[key].DynamicInvoke();
                 }
 
                 lReportMissingRecipient = false;

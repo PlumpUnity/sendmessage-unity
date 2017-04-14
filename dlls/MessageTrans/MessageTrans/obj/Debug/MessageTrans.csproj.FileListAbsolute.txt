@@ -9,3 +9,9 @@ E:\Githubs\sendmessage\dlls\SendMessageHelp\MessageTrans\bin\Debug\MessageTrans.
 E:\Githubs\sendmessage\dlls\SendMessageHelp\MessageTrans\bin\Debug\MessageTrans.pdb
 E:\Githubs\sendmessage\dlls\SendMessageHelp\MessageTrans\obj\Debug\MessageTrans.dll
 E:\Githubs\sendmessage\dlls\SendMessageHelp\MessageTrans\obj\Debug\MessageTrans.pdb
+E:\Githubs\sendmessage\dlls\MessageTrans\MessageTrans\bin\Debug\MessageTrans.dll
+E:\Githubs\sendmessage\dlls\MessageTrans\MessageTrans\bin\Debug\MessageTrans.pdb
+E:\Githubs\sendmessage\dlls\MessageTrans\MessageTrans\bin\Debug\Newtonsoft.Json.dll
+E:\Githubs\sendmessage\dlls\MessageTrans\MessageTrans\obj\Debug\MessageTrans.csprojResolveAssemblyReference.cache
+E:\Githubs\sendmessage\dlls\MessageTrans\MessageTrans\obj\Debug\MessageTrans.dll
+E:\Githubs\sendmessage\dlls\MessageTrans\MessageTrans\obj\Debug\MessageTrans.pdb
