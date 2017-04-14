@@ -41,6 +41,10 @@ public class Demo : MonoBehaviour {
     void Start()
     {
         thisT.text = windowswitch.Current.ToString();
+        receiver.MessageNotHandled = (x) =>
+        {
+            Debug.Log(x);
+        };
     }
     private void InitMessage()
     {

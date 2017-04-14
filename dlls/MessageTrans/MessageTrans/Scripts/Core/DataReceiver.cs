@@ -23,6 +23,7 @@ namespace MessageTrans
         {
             eholder = new Interal.EventHolder();
         }
+        public Action<string> MessageNotHandled { get { return eholder.MessageNotHandled; }set { eholder.MessageNotHandled = value; } }
         //钩子回调
         private unsafe int Hook(int nCode, int wParam, int lParam)
         {
