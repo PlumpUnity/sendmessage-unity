@@ -50,11 +50,25 @@ public class Demo : MonoBehaviour {
     private void InitMessage()
     {
         receiver = new MessageTrans.DataReceiver();
-        receiver.RegistHook();
+        if (!receiver.RegistHook())
+        {
+            Debug.LogError("hook register err");
+        }
 
         childSender = new MessageTrans.DataSender();
         parentSender = new MessageTrans.DataSender();
         receiver.RegisterEvent("simpleText", OnReceive);
+        receiver.MessageNotHandled = Nohandle;
+        receiver.OnError += OnError;
+    }
+
+    private void Nohandle(string str)
+    {
+        Debug.Log(str);
+    }
+    private void OnError(string err)
+    {
+        Debug.Log(err);
     }
     void TryOpenChild()
     {
@@ -108,6 +122,7 @@ public class Demo : MonoBehaviour {
 
     private void OnDestroy()
     {
+        receiver.OnError -= OnError;
         receiver.RemoveHook();
         windowswitch.OnCloseThisWindow();
     }

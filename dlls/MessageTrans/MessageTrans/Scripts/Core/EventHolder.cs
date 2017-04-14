@@ -12,11 +12,7 @@ namespace MessageTrans.Interal
         public Dictionary<string, Delegate> m_needHandle = new Dictionary<string, Delegate>();
         public void NoMessageHandle(string rMessage)
         {
-            if (MessageNotHandled == null)
-            {
-                //Debug.LogWarning("MessageDispatcher: Unhandled Message of type " + rMessage);
-            }
-            else
+            if (MessageNotHandled != null)
             {
                 MessageNotHandled(rMessage);
             }

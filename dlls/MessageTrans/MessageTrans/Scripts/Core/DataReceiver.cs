@@ -12,18 +12,15 @@ namespace MessageTrans
         //是否安装了钩子
         private bool isHook = false;
         private GCHandle gc;
-        private bool _bCallNext;
-        public bool CallNextProc
-        {
-            get { return _bCallNext; }
-            set { _bCallNext = value; }
-        }
         private EventHolder eholder;
+        public Action<string> MessageNotHandled { get { return eholder.MessageNotHandled; } set { eholder.MessageNotHandled = value; } }
+        public event Action<string> OnError;
+
         public DataReceiver()
         {
             eholder = new Interal.EventHolder();
         }
-        public Action<string> MessageNotHandled { get { return eholder.MessageNotHandled; }set { eholder.MessageNotHandled = value; } }
+      
         //钩子回调
         private unsafe int Hook(int nCode, int wParam, int lParam)
         {
@@ -40,33 +37,27 @@ namespace MessageTrans
                     string str = new string((sbyte*)intp);
                     OnReceived(str);
                 }
-                if (CallNextProc)
-                {
-                    return DataUtility.CallNextHookEx(idHook, nCode, wParam, lParam);
-                }
-                else
-                {
-                    //return 1;
-                    return DataUtility.CallNextHookEx(idHook, nCode, wParam, lParam);
-                }
+                return DataUtility.CallNextHookEx(idHook, nCode, wParam, lParam);
             }
             catch (Exception ex)
             {
+                if (OnError != null) OnError(ex.Message);
                 return 0;
             }
         }
 
-        public void RegistHook()
+        public bool RegistHook()
         {
-            DataUtility.HookLoad(Hook, out idHook, out isHook, ref gc);
+            return DataUtility.HookLoad(Hook, out idHook, out isHook, ref gc);
         }
 
-        public void RemoveHook()
+        public bool RemoveHook()
         {
             if (isHook)
             {
-                DataUtility.UnhookWindowsHookEx(idHook);
+               return DataUtility.UnhookWindowsHookEx(idHook);
             }
+            return true;
         }
 
         public void RegisterEvent(string key, Action action)
