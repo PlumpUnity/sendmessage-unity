@@ -35,7 +35,6 @@ E:\Githubs\sendmessage\WpfSolution\ControlProgram\obj\Debug\WpfApplication1.exe
 E:\Githubs\sendmessage\WpfSolution\ControlProgram\obj\Debug\WpfApplication1.pdb
 E:\Githubs\sendmessage\WpfSolution\ControlProgram\bin\Debug\WpfApplication1.exe
 E:\Githubs\sendmessage\WpfSolution\ControlProgram\bin\Debug\WpfApplication1.pdb
-E:\Githubs\sendmessage\WpfSolution\ControlProgram\bin\Debug\SendMessageHelp.dll
 E:\Githubs\sendmessage\WpfSolution\ControlProgram\obj\Debug\WpfApplication1.csprojResolveAssemblyReference.cache
 E:\Githubs\sendmessage\WpfSolution\ControlProgram\obj\Debug\MainWindow.g.cs
 E:\Githubs\sendmessage\WpfSolution\ControlProgram\obj\Debug\App.g.cs
@@ -46,3 +45,4 @@ E:\Githubs\sendmessage\WpfSolution\ControlProgram\obj\Debug\MainWindow.baml
 E:\Githubs\sendmessage\WpfSolution\ControlProgram\obj\Debug\WpfApplication1.g.resources
 E:\Githubs\sendmessage\WpfSolution\ControlProgram\obj\Debug\WpfApplication1.Properties.Resources.resources
 E:\Githubs\sendmessage\WpfSolution\ControlProgram\obj\Debug\WpfApplication1.csproj.GenerateResource.Cache
+E:\Githubs\sendmessage\WpfSolution\ControlProgram\bin\Debug\MessageTrans.dll
